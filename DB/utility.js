@@ -19,7 +19,7 @@ mongoose.connect(env.dbserver, {
    module.exports={
     insertAssignment:async (obj)=>{
         try{
-            
+            console.log(obj);
           const AssignmentData=new AssignmentModel(obj);
           const data= await AssignmentData.save();
           return data;
@@ -52,5 +52,13 @@ mongoose.connect(env.dbserver, {
         }catch(e){
             throw e;
         }
+    },
+    getStudentAssignment:async(obj)=>{
+        try{
+            let data=await AssignmentModel.find({ students:{$all:[obj.username]} });
+            return data;
+        } catch(e){ 
+            throw e;
+        }  
     }
    }
