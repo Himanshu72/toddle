@@ -230,4 +230,4 @@ app.use('/graphql', graphqlHTTP({
   rootValue: root,
   graphiql: true,
 }));
-app.listen(3000, () => console.log('Api Gatway is running...'));
+app.listen(process.env.PORT || '3000', () => console.log('Api Gatway is running...'));
