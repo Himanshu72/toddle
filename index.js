@@ -12,8 +12,8 @@ type Query {
     updateAssignment(token:String!,username:String!,_id:String!,description:String,deadLine:String,createdBy:String,students:[String]):Assignment
     deleteAssignment(token:String!,username:String!,_id:String!):Message
     submitAssignment(token:String!,username:String!,remark:String!,submitedBy:String!,Assignment:String!):Submit
-    getAssignment(token:String!,username:String!,filter:String,username:String!,isStudent:Boolean!):[Assignment]
-    getAssignmentSubmission(token:String!,username:String!,isStudent:Boolean!,username:String!,Assignment:String!):[Submit]
+    getAssignment(token:String!,username:String!,filter:String):[Assignment]
+    getAssignmentSubmission(token:String!,username:String!,Assignment:String!):[Submit]
   }
 
   type Assignment{
@@ -201,8 +201,7 @@ var root = {
       },
       async  getAssignment(args){
         try{    
-          let data = await resolver.getAssignment(args,args.filter);
-                       return data;  
+         
           if(jwt.isAuth(args.username,args.token)==false){
                     throw new Error("Invalid Token");
               }else{
