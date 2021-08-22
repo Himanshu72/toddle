@@ -7,6 +7,7 @@ let schema = buildSchema(`
         deleteAssignment(_id:String!):Message
         getAssignment(filter:String,username:String!,isStudent:Boolean!):[Assignment]
         submitAssignment(remark:String!,submitedBy:String!,Assignment:String!):Submit
+        getAssignmentSubmission(isStudent:Boolean!,username:String!,Assignment:String!):[Submit]
     }
    type Assignment{
       description:String
@@ -43,7 +44,7 @@ function getAssignmentStatus(publishAt,deadLine){
    }
 }
 function getSubmissionStatus(obj){
-    
+    //will do it               
 }
 
 let resolver = { 
@@ -117,6 +118,24 @@ let resolver = {
                     args._id=args.submitedBy+args.Assignment;
                     let data=await utility.insertSubmission(args);
                     return data;
+                    }catch(e){
+                        throw e;
+                    }
+                  },
+                  async  getAssignmentSubmission(args){
+                    try{
+                        console.log(args);
+                        if(args.isStudent){
+                          let res=[];
+                            let data= await utility.getAssignmentSubmmistionStudent(args);
+                          //Add status
+                          res.push(data);
+                            console.log(data);
+                          return res;  
+                        }else{
+                            let res= await utility.getAssignmentSubmmistionTutor(args);
+                            return res;
+                        }
                     }catch(e){
                         throw e;
                     }
