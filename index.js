@@ -9,4 +9,4 @@ app.use('/graphql', graphqlHTTP({
   rootValue: resolver,
   graphiql: true,
 }));
-app.listen(4001, () => console.log('Assignment EndPoint Runing...'));
+app.listen(process.env.PORT || '4001', () => console.log('Assignment EndPoint Runing...'));
