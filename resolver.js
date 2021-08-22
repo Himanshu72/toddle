@@ -8,7 +8,7 @@ module.exports={
         let result;
         try{
          result=await axios({
-            url: 'http://localhost:4000/graphql',
+            url: 'https://authendpoint.herokuapp.com/graphql',
             method: 'post',
             data: {
               query: `
@@ -35,7 +35,7 @@ module.exports={
       let result;
         try{
          result=await axios({
-            url: 'http://localhost:4000/graphql',
+            url: 'https://authendpoint.herokuapp.com/graphql',
             method: 'post',
             data: {
               query: `
@@ -75,7 +75,7 @@ module.exports={
         console.log(args.students);
         try{
          result=await axios({
-            url: 'http://localhost:4001/graphql',
+            url: 'https://assignmentendpoi.herokuapp.com/graphql',
             method: 'post',
             data: {
               query: `
@@ -120,7 +120,7 @@ module.exports={
         console.log(args.students);
         try{
          result=await axios({
-            url: 'http://localhost:4001/graphql',
+            url: 'https://assignmentendpoi.herokuapp.com/graphql',
             method: 'post',
             data: {
               query: `
@@ -153,7 +153,7 @@ module.exports={
     async deleteAssignment(args){
       try{
         result=await axios({
-           url: 'http://localhost:4001/graphql',
+           url: 'https://assignmentendpoi.herokuapp.com/graphql',
            method: 'post',
            data: {
              query: `
@@ -180,7 +180,7 @@ module.exports={
     async submitAssignment(args){
       try{
         result=await axios({
-           url: 'http://localhost:4001/graphql',
+           url: 'https://assignmentendpoi.herokuapp.com/graphql',
            method: 'post',
            data: {
              query: `
@@ -211,7 +211,7 @@ module.exports={
     async getAssignmentSubmission(args){
       try{
         result=await axios({
-           url: 'http://localhost:4001/graphql',
+           url: 'https://assignmentendpoi.herokuapp.com/graphql',
            method: 'post',
            data: {
              query: `
@@ -243,7 +243,7 @@ module.exports={
         
       if(!filter){
         result=await axios({
-           url: 'http://localhost:4001/graphql',
+           url: 'https://assignmentendpoi.herokuapp.com/graphql',
            method: 'post',
            data: {
              query: `
@@ -262,7 +262,7 @@ module.exports={
          })
         }else{
           result=await axios({
-            url: 'http://localhost:4001/graphql',
+            url: 'https://assignmentendpoi.herokuapp.com/graphql',
             method: 'post',
             data: {
               query: `
