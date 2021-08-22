@@ -60,5 +60,14 @@ mongoose.connect(env.dbserver, {
         } catch(e){ 
             throw e;
         }  
+    },
+    async insertSubmission(obj){
+        try{
+            let submitData=submitModel(obj);
+            let data =await submitData.save();
+             return data;   
+        }catch(e){
+            throw e;
+        }
     }
    }

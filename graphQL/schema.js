@@ -6,6 +6,7 @@ let schema = buildSchema(`
         updateAssignment(_id:String!,description:String,deadLine:String,createdBy:String,students:[String]):Assignment
         deleteAssignment(_id:String!):Message
         getAssignment(filter:String,username:String!,isStudent:Boolean!):[Assignment]
+        submitAssignment(remark:String!,submitedBy:String!,Assignment:String!):Submit
     }
    type Assignment{
       description:String
@@ -16,6 +17,13 @@ let schema = buildSchema(`
       status:String
       _id:String
    } 
+
+   type Submit{
+    _id:String
+    remark:String
+    submitedBy:String
+    Assignment:String 
+    }
 
    type Message{
        message:String
@@ -33,6 +41,9 @@ function getAssignmentStatus(publishAt,deadLine){
    }else{
         return "SHEDULED"
    }
+}
+function getSubmissionStatus(obj){
+    
 }
 
 let resolver = { 
@@ -100,6 +111,15 @@ let resolver = {
                                     throw e;
                                 }
                             }
+                  },
+                  async submitAssignment(args){
+                    try{
+                    args._id=args.submitedBy+args.Assignment;
+                    let data=await utility.insertSubmission(args);
+                    return data;
+                    }catch(e){
+                        throw e;
+                    }
                   }
                 };
 module.exports={
