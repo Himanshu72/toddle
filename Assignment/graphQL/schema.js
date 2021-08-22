@@ -12,7 +12,7 @@ let schema = buildSchema(`
    type Assignment{
       description:String
       students:[String]
-      publishAT:String
+      publishAt:String
       deadLine:String
       createdBy:String 
       status:String
@@ -43,8 +43,31 @@ function getAssignmentStatus(publishAt,deadLine){
         return "SHEDULED"
    }
 }
-function getSubmissionStatus(obj){
-    //will do it               
+
+async function getSubmissionStatus(username,obj){
+    //will do it 
+    let cur=new Date().getTime();
+    let map={};
+    try{
+       let data =await  utility.getAllStudentSubmission(username);
+        for(let a of data){
+            map[a.Assignment]=1;
+        }
+        
+        
+        for(let x=0;x<obj.length;x++){
+              if(map[obj[x]._id]==1)
+                    obj[x].status="SUBMITED";
+               else if(obj[x].deadLine > cur )
+                    obj[x].status="PENDING";
+              else
+                    obj[x].status="OVERDUE";
+                
+        }
+      return obj;
+    }catch(e){
+        throw e;
+    }              
 }
 
 let resolver = { 
@@ -84,14 +107,9 @@ let resolver = {
                             if(args.isStudent){
                                 try{
                                     let data=await utility.getStudentAssignment(args);
-                                    for(let a of data){
-                                        a.status=getAssignmentStatus(a.publishAt,a.deadLine);
-                                    }
-                                    if(args.filter){
-                                        data=data.filter( (cur)=>{
-                                            return cur.status==args.filter;
-                                        })
-                                    }
+                                    //change here
+                                       data=getSubmissionStatus(args.username,data); 
+                                        
                                     return data;
                                 }catch(e){
                                     throw e;

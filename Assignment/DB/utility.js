@@ -71,15 +71,15 @@ mongoose.connect(env.dbserver, {
         }
     },
    
-    async getAllStudentSubmission(username){
-         try{
-            let data= await submitModel.find({submitedBy:username});
-            return data;
-         }catch(e){
-             console.log(e);
-             throw e;
-         }
-     }, 
+        async getAllStudentSubmission(username){
+            try{
+                let data= await submitModel.find({submitedBy:username});
+                return data;
+            }catch(e){
+                console.log(e);
+                throw e;
+            }
+        }, 
      async  getALlSubmissionOfStudent(Assignment){
         try{
             let data= submitModel.find({Assignment:Assignment});
@@ -105,6 +105,7 @@ mongoose.connect(env.dbserver, {
         }catch(e){
             throw e;
         }
-     }
+     },
+     
 
    }
