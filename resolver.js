@@ -268,7 +268,7 @@ module.exports={
               query: `
                    
                 query {
-                 getAssignment(username:"${args.username}",isStudent:${args.isStudent},filter:${args.filter}){
+                 getAssignment(username:"${args.username}",isStudent:${args.isStudent},filter:"${args.filter}"){
                    status
                    deadLine
                    description
